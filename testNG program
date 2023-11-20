@@ -1,0 +1,58 @@
+public class AmazonTest {
+    WebDriver driver;
+
+    @BeforeClass
+    public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "path_to_chromedriver");
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    @Test(priority = 1)
+    public void signUpWithGmail() {
+        driver.get("https://www.amazon.com/");
+        // Your sign-up logic with Gmail
+        // Assume a sign-up button is clicked and Gmail credentials are entered
+        // Replace the following lines with your sign-up process
+        WebElement signUpButton = driver.findElement(By.id("signup-button"));
+        signUpButton.click();
+        WebElement emailField = driver.findElement(By.id("email"));
+        emailField.sendKeys("your_email@gmail.com");
+        WebElement passwordField = driver.findElement(By.id("password"));
+        passwordField.sendKeys("your_password");
+        WebElement signUpSubmitButton = driver.findElement(By.id("signup-submit-button"));
+        signUpSubmitButton.click();
+
+        // Assertion for successful sign-up
+        WebElement successMessage = driver.findElement(By.id("success-message"));
+        Assert.assertTrue(successMessage.isDisplayed());
+    }
+
+    @Test(priority = 2)
+    public void loginWithGmail() {
+        driver.get("https://www.amazon.com/");
+        // Your login logic with Gmail
+        // Assume a login button is clicked and Gmail credentials are entered
+        // Replace the following lines with your login process
+        WebElement loginButton = driver.findElement(By.id("login-button"));
+        loginButton.click();
+        WebElement emailField = driver.findElement(By.id("email"));
+        emailField.sendKeys("your_email@gmail.com");
+        WebElement passwordField = driver.findElement(By.id("password"));
+        passwordField.sendKeys("your_password");
+        WebElement loginSubmitButton = driver.findElement(By.id("login-submit-button"));
+        loginSubmitButton.click();
+
+        // Assertion for successful login
+        WebElement loggedInUser = driver.findElement(By.id("user-info"));
+        Assert.assertTrue(loggedInUser.isDisplayed());
+    }
+
+    @AfterClass
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+}
